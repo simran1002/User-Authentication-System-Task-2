@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="stylesheet" href="/css/email.css">
+</head>
+<body>
+	<div class="panel">
+  <img class="panel__avatar" src="http://icons.iconarchive.com/icons/jonathan-rey/simpsons/256/Bart-Simpson-01-icon.png" alt="avatar" />
+  <form action="/password/reset" method="post" class="inputs">
+    <div class="inputs__item">
+      <label for="email" class="inputs__label">Enter Your Email</label>
+      <input type="email" name="uemail" class="inputs__input" id="email" value="email" />
+    </div>
+    {{!-- <div class="inputs__item inputs__item--new">
+      <label for="new-password" class="inputs__label">New password</label>
+      <input type="password" class="inputs__input" id="new-password" value="password" />
+    </div> --}}
+    <div class="inputs__item inputs__item--cta">
+      <input type="submit" class="btn" value="Send" />
+    </div>
+  </form>
+</div>
+</body>
+</html>
