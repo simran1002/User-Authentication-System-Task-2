@@ -45,7 +45,7 @@ const userSchema=new mongoose.Schema({
 userSchema.methods.generateAuthToken=async function(){
     try {
         console.log(this._id)
-        const token=jwt.sign({_id:this._id.toString},process.env.SECRET_KEY);
+        const token=jwt.sign({_id:this._id.toString},process.env.SECRET_KEY||"heywhatsupyoyo");
         this.tokens=this.tokens.concat({token:token});
         await this.save();
         return token;
@@ -60,9 +60,13 @@ userSchema.methods.generateresetToken=async function(){
         
         console.log(this._id.toString());
 
-        const token=jwt.sign({_id:this._id.toString()},process.env.SECRET_KEY,{
-            expiresIn:"15m"
-        });
+        const token = jwt.sign(
+          { _id: this._id.toString() },
+          process.env.SECRET_KEY || "heywhatsupyoyo",
+          {
+            expiresIn: "15m",
+          }
+        );
         this.tokens=this.tokens.concat({token:token});
         return token;
     } catch (e) {
@@ -79,8 +83,6 @@ userSchema.pre("save",async function(next){
     if(this.isModified("password")){
        
         this.password=await bcrypt.hash(this.password,10);
-       
-
         this.confirmpassword=await bcrypt.hash(this.password,10);;
     }
 
@@ -90,10 +92,7 @@ userSchema.pre("save",async function(next){
 
 userSchema.pre("updateOne",async function(next){
     if(this.isModified("password")){
-        
         this.password=await bcrypt.hash(this.password,10);
-       
-
         this.confirmpassword=await bcrypt.hash(this.password,10);;
     }
 
