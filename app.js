@@ -9,6 +9,7 @@ require("./db/connection");
 const Register = require("./models/registers");
 const auth = require("./middleware/auth");
 const transpoter = require("./middleware/email");
+const port = process.env.PORT || 3000;
 
 const static_path = path.join(__dirname, "./public");
 const views_path = path.join(__dirname, "./views");
@@ -246,6 +247,6 @@ app.get("/makeadmin",async(req,res)=>{
 });
 
 
-app.listen(process.env.PORT || 3000, () => {
+app.listen(port, () => {
   console.log("connected");
 });
